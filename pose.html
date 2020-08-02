@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Pose Detection Using Tensorflow.js + Posenet</title>
+    <link rel="icon" href="http://www.nanaessandoh.com/nana.jpeg">
+    <meta name="description" content="Pose Detection Demo" />
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+
+    <!-- Link to the last version of BabylonJS -->
+    <script src="https://preview.babylonjs.com/babylon.js"></script>
+    <!-- Link to the last version of BabylonJS loaders to enable loading filetypes such as .gltf -->
+    <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+    <!-- Link to pep.js to ensure pointer events work consistently in all browsers -->
+    <script src="https://code.jquery.com/pep/0.4.1/pep.js"></script>
+</head>
+
+<body>
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark blue-gradient">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.nanaessandoh.com/projects">← Go Back</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Face Detection</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto nav-flex-icons">
+                <li class="nav-item avatar">
+                    <a class="nav-link p-0" href="http://www.nanaessandoh.com/">
+                        <img src="http://www.nanaessandoh.com/nana.jpeg" class="rounded-circle z-depth-0" alt="avatar image" height="35">
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!--/.Navbar -->
+    <ul class="nav justify-content-center" id="TabsContainerNav" style="display: none;">
+        <li class="nav-item">
+            <a href="#home" class="btn btn-primary blue-gradient rounded-pill mt-5" id="home-tab" data-toggle="tab" role="tab" aria-controls="home" aria-selected="true" onclick="loadModels()">1. Image Upload</a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#profile" class="btn btn-primary blue-gradient rounded-pill mt-5" id="profile-tab" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="true" onclick="loadCam('#inputVideo')">2. Use Webcam</a>
+        </li>
+    </ul>
+
+    <div class="container text-center text-primary" id="loadingTab1">
+        <div class="d-flex align-items-center justify-content-center" style="height: 10vh;">
+            <h1 id="loadingTextTab1">Loading Machine Learning Models...</h1>
+            <div>
+                <div class="spinner-border ml-auto" aria-hidden="true" role="status"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="TabsContainer" style="display: none;">
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                <div id="Tab1" class="text-center" style="display: none;">
+                    <h5 class="animated fadeIn mb-3">
+                        Upload an Image to be used for Pose Detection.
+                    </h5>
+                    <div class="input-group">
+
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="refImgUploadInput" aria-describedby="refImgUploadInputAddon01" onchange="uploadRefImage()" accept=".jpg, .jpeg, .png">
+                            <label class="custom-file-label " for="refImgUploadInput">Select File</label>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="view" id="imageContainer">
+                        <img id="refImg" src="" alt="sample image" style="width: 100%;">
+                        <div class="mask flex-center ">
+                            <canvas id="refImgOverlay" class="overlay" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                <div id="Tab2" class="text-center">
+                    <div class="view flex-center ">
+                        <video onplay="onPlay(this)" id="inputVideo" autoplay muted></video>
+                        <div class="mask flex-center ">
+                            <canvas id="refVideoOverlay" class="overlay" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <!-- JQuery -->
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.js"></script>
+    <!-- Load TensorFlow.js -->
+    <script src="https://unpkg.com/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://unpkg.com/@tensorflow-models/posenet">
+    </script>
+    <script type="text/javascript" src="js/face-api.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/image_controller.js"></script>
+    <script type="text/javascript" src="js/cam_controller.js"></script>
+    <script type="text/javascript" src="js/babylon_model.js"></script>
+</body>
+
+</html>
