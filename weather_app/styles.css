@@ -1,0 +1,34 @@
+body {
+  background-image: url(img/back.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  letter-spacing: 0.2em;
+  font-size: 0.8em;
+}
+.container {
+  max-width: 400px;
+}
+
+h1,
+h6,
+label {
+  color: #fff;
+}
+
+.icon {
+  position: relative;
+  top: -50px;
+  border-radius: 50%;
+  width: 100px;
+  margin-bottom: -50px;
+}
+
+.day {
+  background-image: url(img/day.jpg);
+}
+
+.night {
+  background-image: url(img/night.jpg);
+}
